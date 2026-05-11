@@ -53,8 +53,49 @@ public class Pilha<E> {
 	 * @throws IllegalArgumentException se a pilha não contém numItens elementos.
 	 */
 	public Pilha<E> subPilha(int numItens) {
-		
-		// TODO
-		return null;
+
+		if (numItens < 0) {
+			throw new IllegalArgumentException("A quantidade de itens não pode ser negativa.");
+		}
+
+		Pilha<E> auxiliar = new Pilha<>();
+		Pilha<E> resultado = new Pilha<>();
+
+		Celula<E> atual = topo;
+		int contador = 0;
+
+		while (atual != fundo && contador < numItens){
+			auxiliar.empilhar(atual.getItem());
+			atual = atual.getProximo();
+			contador++;
+		}
+
+		if (contador < numItens) {
+			throw new IllegalArgumentException("A pilha não contém " + numItens + " elementos.");
+		}
+
+		while (!auxiliar.vazia()) {
+			resultado.empilhar(auxiliar.desempilhar());
+		}
+
+		return resultado;
+	}
+
+	@Override
+	public String toString() {
+
+		if (vazia()) {
+			return "Pilha vazia.";
+		}
+
+		StringBuilder sb = new StringBuilder();
+		Celula<E> atual = topo;
+
+		while (atual != fundo) {
+			sb.append(atual.getItem()).append("\n");
+			atual = atual.getProximo();
+		}
+
+		return sb.toString();
 	}
 }
