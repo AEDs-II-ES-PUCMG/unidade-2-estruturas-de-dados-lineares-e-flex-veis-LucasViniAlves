@@ -53,49 +53,30 @@ public class Pilha<E> {
 	 * @throws IllegalArgumentException se a pilha não contém numItens elementos.
 	 */
 	public Pilha<E> subPilha(int numItens) {
-
-		if (numItens < 0) {
-			throw new IllegalArgumentException("A quantidade de itens não pode ser negativa.");
-		}
-
-		Pilha<E> auxiliar = new Pilha<>();
-		Pilha<E> resultado = new Pilha<>();
-
-		Celula<E> atual = topo;
-		int contador = 0;
-
-		while (atual != fundo && contador < numItens){
-			auxiliar.empilhar(atual.getItem());
-			atual = atual.getProximo();
-			contador++;
-		}
-
-		if (contador < numItens) {
-			throw new IllegalArgumentException("A pilha não contém " + numItens + " elementos.");
-		}
-
-		while (!auxiliar.vazia()) {
-			resultado.empilhar(auxiliar.desempilhar());
-		}
-
-		return resultado;
+		
+		// TODO
+		return null;
 	}
 
-	@Override
-	public String toString() {
-
-		if (vazia()) {
-			return "Pilha vazia.";
+	void imprimir() {
+		if(vazia()){
+			throw new NoSuchElementException("A pilha está vazia!");
+		}
+		Celula<E> aux = topo;
+		while(aux!=fundo){
+			System.out.println(aux.getItem());
+			aux = aux.getProximo();
 		}
 
-		StringBuilder sb = new StringBuilder();
+	}
+	void imprime_certo(){
 		Celula<E> atual = topo;
-
-		while (atual != fundo) {
-			sb.append(atual.getItem()).append("\n");
-			atual = atual.getProximo();
+		certo(atual);
+	}
+	void certo(Celula<E> atual){
+		if(atual!=fundo){
+			certo(atual.getProximo());
+			System.out.println(atual.getItem());
 		}
-
-		return sb.toString();
 	}
 }
